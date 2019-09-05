@@ -1,0 +1,314 @@
+* {
+	/* Reset browsers default margin, padding and font sizes */
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 100%;
+	/* Always show a scrollbar for short pages - stops the jump when the scrollbar appears. non-IE browsers */
+	height: 100%;
+	margin-bottom: 1px;
+	color: #536482;
+	background-color: #FFFFFF;
+}
+
+body {
+	/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 62.5%;
+	margin: 0;
+	padding: 12px 0;
+	color: #536482;
+	background-color: #FFFFFF;	
+}
+
+a:link	{ color: #105289;; text-decoration: underline; }
+a:visited	{ color: #105289; text-decoration: underline; }
+a:hover	{ color: #D31141; text-decoration: underline; }
+a:active	{ color: #368AD2; text-decoration: underline; }
+
+h1 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	margin-right: 200px;
+	color: #FFFFFF;
+	margin-top: 15px;
+	font-weight: bold;
+	font-size: 2em;
+}
+
+h2 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #28313F;
+	font-size: 2em;
+	margin: 0.8em 0 0.2em 0;
+}
+
+h3 {
+	/* Sub-headers (also used as post headers, but defined later) */
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-bottom: 1px solid #CCCCCC;
+	margin-bottom: 3px;
+	padding-bottom: 2px;
+	font-size: 1.3em;
+	color: #115098;
+	margin-top: 20px;
+}
+
+h4 {
+	font-family: Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 1em;
+}
+
+p {
+	line-height: 1.3em;
+	font-size: 1.1em;
+	margin-bottom: 1.5em;
+}
+
+img {
+	border-width: 0;
+}
+
+hr {
+	/* Also see tweaks.css */
+	border: 0 none #FFFFFF;
+	border-top: 1px solid #CCCCCC;
+	height: 1px;
+	margin: 5px 0;
+	display: block;
+	clear: both;
+}
+
+hr.dashed {
+	border-top: 1px dashed #CCCCCC;
+	margin: 10px 0;
+}
+
+#wrap {
+	padding: 0 20px;
+	min-width: 650px;
+}
+
+.headerbar {
+	background: #ebebeb none repeat-x 0 0;
+	color: #FFFFFF;
+	margin-bottom: 4px;
+	padding: 0 5px;
+}
+
+.headerbar {
+	background-color: #12A3EB;
+	background-image: url("/_assets/img/bg_header.gif");
+	color: #FFFFFF;
+}
+
+#logo {
+	float: left;
+	width: auto;
+	padding: 10px 13px 0 10px;
+}
+
+a#logo:hover {
+	text-decoration: none;
+}
+
+#site-description {
+	float: left;
+	width: 70%;
+}
+
+#site-description h1 {
+	margin-right: 0;
+}
+
+.navbar {
+	padding: 0 10px;
+	background-color: #cadceb;
+}
+
+ul.linklist {
+	display: block;
+	margin: 0;
+}
+
+ul.linklist li {
+	display: block;
+	list-style-type: none;
+	float: left;
+	width: auto;
+	margin-right: 5px;
+	font-size: 1.1em;
+	line-height: 2.2em;
+}
+
+ul.linklist a{
+	text-decoration:none;
+}
+
+ul.linklist li.rightside, p.rightside {
+	float: right;
+	margin-right: 0;
+	margin-left: 5px;
+	text-align: right;
+}
+
+ul.navlinks {
+	padding-bottom: 1px;
+	margin-bottom: 1px;
+	font-weight: bold;
+}
+
+ul.leftside {
+	float: left;
+	margin-left: 0;
+	margin-right: 5px;
+	text-align: left;
+}
+
+ul.rightside {
+	float: right;
+	margin-left: 5px;
+	margin-right: -5px;
+	text-align: right;
+}
+
+span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
+	font-size: 1px;
+	line-height: 1px;
+	display: block;
+	height: 5px;
+	background-repeat: no-repeat;
+}
+
+span.corners-top {
+	background-image: none;
+	background-position: 0 0;
+	margin: 0 -5px;
+	background-image: url("/_assets/img/corners_left.png");
+}
+
+span.corners-top span {
+	background-image: none;
+	background-position: 100% 0;
+	background-image: url("/_assets/img/corners_right.png");
+}
+
+span.corners-bottom {
+	background-image: none;
+	background-position: 0 100%;
+	margin: 0 -5px;
+	clear: both;
+	background-image: url("/_assets/img/corners_left.png");
+}
+
+span.corners-bottom span {
+	background-image: none;
+	background-position: 100% 100%;
+	background-image: url("/_assets/img/corners_right.png");
+}
+
+
+.navbar span.corners-top, .navbar span.corners-bottom {
+	margin: 0 -10px;
+}
+
+#page-txt-body{
+	clear: both;
+	padding: 0 10px;
+	background-color: #e1ebf2;
+	margin-top: 4px;
+	margin-bottom:4px;
+}
+
+#page-txt-body span.corners-top, #page-txt-body span.corners-bottom {
+	margin: 0 -10px;
+}
+
+#page-txt-body h3 {
+	font-size: 1.5em;
+	padding: 2px 0 0 0;
+	margin: 0 0 0.3em 0 !important;
+	text-transform: none;
+	border: none;
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	line-height: 125%;
+}
+
+.body-block{
+	clear: both;
+	padding: 0 10px;
+	background-color: #e1ebf2;
+	margin-top: 4px;
+	margin-bottom:4px;
+}
+
+.body-block .cnt{
+	font-size: 1.4em;
+}
+
+.body-block span.corners-top, .body-block span.corners-bottom {
+	margin: 0 -10px;
+}
+
+.content{
+	font-size: 1.3em;
+}
+
+.content ol{ margin-left:30px;margin-bottom:1.5em }
+
+.copyright {
+	padding: 5px;
+	text-align: center;
+	color: #555555;
+}
+
+#keyword{
+	width:220px;
+	height:18px;
+	padding:3px 0px 0px 20px;
+	border: solid 1px #12a3eb;
+	margin:0px 0px 0px 0px;
+	background-image:url(/_assets/img/loading2_st.gif);
+	background-repeat: no-repeat;
+	background-position: 2px;
+}
+
+#lookupsmb{height:24px;}
+
+#results{
+	padding-top:10pt;
+	font-size:1.4em;
+	min-height:300px	
+}
+
+#results s{
+	text-decoration: none;
+	color: red;
+}
+
+#results i{
+	color:green;
+}
+
+#results u{ text-decoration: none; background-color: #f0e68c;}
+
+label{ font-size:1.2em }
+
+#misprint-report{display:none}
+#misprint-rng{height:170px;overflow:scroll;font-size:10pt;width:480px;border: solid 1px #12A3EB;}
+#misprint-rng b{color:#ff0000;font-weight:bold}
+#misprint-cmnt{height:60px;width:480px}
+
+.contents{
+	margin-left:50px;
+	margin-bottom:20px
+}
+.contents a{
+	font-size:1.3em;
+}
+
+.alert{color:red;font-weight:bold}
