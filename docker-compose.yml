@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  warodai:
+    image: php:5-apache
+    ports:
+      - "80:80"
+    volumes:
+      - /d/Dev/nbyars/warodai.ru/public:/var/www/html
