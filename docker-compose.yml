@@ -2,8 +2,11 @@ version: '2'
 
 services:
   warodai:
-    image: php:5-apache
+    image: warodai
+    build: ./
     ports:
       - "80:80"
     volumes:
       - /d/Dev/nbyars/warodai.ru/public:/var/www/html
+      - /d/Dev/nbyars/warodai.ru/vendor:/var/www/vendor
+    network_mode: host
