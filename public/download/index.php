@@ -20,7 +20,7 @@
         <strong>Формат EPWING:</strong>
         <a href="/download/warodai_epwing.zip">http://www.warodai.ru/download/warodai_epwing.zip</a> (<?= round(filesize('warodai_epwing.zip')*.000001,2)?>Mb)
         <br/>
-        <span style="font-size: smaller">Сборка от <?= date('d.m.Y',filemtime('warodai_ebwing.zip'))?></span>
+        <span style="font-size: smaller">Сборка от <?= date('d.m.Y',filemtime('warodai_epwing.zip'))?></span>
     </p>
 
     <p>
