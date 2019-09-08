@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<?php
+    date_default_timezone_set('UTC');
+?>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -7,7 +9,7 @@
     <meta http-equiv="content-language" content="ru-ru"/>
     <meta http-equiv="imagetoolbar" content="no"/>
     <meta name="distribution" content="global"/>
-    <meta name="copyright" content="2008 Warodai"/>
+    <meta name="copyright" content="2008-<?=date('Y')?> Warodai"/>
     <meta name="keywords" content="японско-русский электронный словарь"/>
     <meta name="description" content="японско-русский электронный словарь"/>
     <title>Японско-русский электронный словарь Warodai</title>
@@ -34,16 +36,16 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Японско-русский словарь</a>
+                        <a class="nav-link" data-match="lookup" href="/lookup/">Японско-русский словарь</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/download/">Скачать</a>
+                        <a class="nav-link" data-match="download" href="/download/">Скачать</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" href="/help/">Помощь</a>
+                        <a class="nav-link" data-match="help" href="/help/">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about/">О проекте</a>
+                        <a class="nav-link" data-match="about" href="/about/">О проекте</a>
                     </li>
                 </ul>
             </div>

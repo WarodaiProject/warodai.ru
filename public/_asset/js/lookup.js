@@ -25,11 +25,13 @@ function lookup(){
     var keyword = $('#keyword').val();
     if(!keyword) return;
 
-    $('#search-btn i').removeClass('fa fa-search').addClass('fas fa-circle-notch fa-spin');
+    $('#results').fadeOut();
+    $('#loading').fadeIn();
     getCards(
         keyword,
         function(){
-            $('#search-btn i').removeClass('fas fa-circle-notch fa-spin').addClass('fa fa-search');
+            $('#loading').fadeOut();
+            $('#results').fadeIn('slow');
         }
     );
 
@@ -117,4 +119,11 @@ $(window).on('hashchange', onhashchange);
 $(document).ready(function(){
     onhashchange();
     $('#peepModal').modal({'show': false});
+
+    $('.nav-link').each(function(){
+        var t = $(this);
+        if(window.location.pathname.match(new RegExp(t.data('match')))){
+            t.addClass('active')
+        }
+    })
 });

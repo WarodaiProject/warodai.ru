@@ -3,7 +3,7 @@
     <div class="position-relative">
             <input 
                 type="text" 
-                class="form-control" 
+                class="form-control form-control-lg" 
                 onkeydown="initLookup(event)" 
                 name="keyword" 
                 id="keyword"
@@ -19,6 +19,10 @@
     </form>
 
     <div id="results" class="container mt-4 px-0"></div>
+
+    <div id="loading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+    </div>
 
     <div id="notes" class="text-muted">
         <p>В словаре можно искать:</p>

@@ -1,3 +1,7 @@
+html {
+    overflow-y:scroll;
+}
+
 input:focus::placeholder{
 	color:transparent;
 }
@@ -24,6 +28,10 @@ input:focus::placeholder{
 	color: #fff;
 }
 
+.navbar-dark .navbar-nav .active{
+	font-weight: bold;
+}
+
 .menu-toggler{
 	width: 36px;
 	height: 36px;
@@ -46,10 +54,11 @@ input:focus::placeholder{
 #search-btn{
 	position: absolute;
 	right: 2px;
-	top: 8px;
+	top: 12px;
 	background-color: #ffffff;
 	width: 36px;
 	text-align: center;
+	cursor: pointer;
 }
 
 #results s, #peepModal .modal-body s{
@@ -63,6 +72,14 @@ input:focus::placeholder{
 
 #results u, #peepModal .modal-body u{
 	text-decoration: none; background-color: #eed80e;
+}
+
+#loading{
+	display: none;
+	margin-top: 5rem;
+	text-align: center;
+	font-size: 3rem;
+	color: #cccccc;
 }
 
 .modal-content .close{

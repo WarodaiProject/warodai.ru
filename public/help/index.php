@@ -221,7 +221,7 @@
 
     <p>
         <strong>Схема 1</strong><br/>
-        <img style="width:100%" src="img/help-1.png"/>
+        <img style="width:100%;max-width:650px;" src="img/help-1.png"/>
     </p>
 
     <p>
@@ -242,7 +242,7 @@
 
     <p>
         <strong>Схема 2<br/>
-        </strong><img style="width:100%" src="img/help-2.png"/>
+        </strong><img style="width:100%;max-width:780px" src="img/help-2.png"/>
     </p>
 
     <p>
@@ -262,7 +262,7 @@
 
     <p>
         <strong>Схема 3</strong><br/>
-        <img style="width:100%" src="img/help-3.png"/>
+        <img style="width:100%;max-width:534px;" src="img/help-3.png"/>
     </p>
 
     <p>
