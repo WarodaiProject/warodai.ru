@@ -12,6 +12,8 @@
     <meta name="description" content="японско-русский электронный словарь"/>
     <title>Японско-русский электронный словарь Warodai</title>
 
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon.png">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css' rel='stylesheet' type='text/css'>
 
