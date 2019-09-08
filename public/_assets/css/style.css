@@ -52,16 +52,25 @@ input:focus::placeholder{
 	text-align: center;
 }
 
-#results s{
+#results s, #peepModal .modal-body s{
 	text-decoration: none;
 	color: red;
 }
 
-#results i{
+#results i, #peepModal .modal-body i{
 	color:green;
 }
 
-#results u{ text-decoration: none; background-color: #eed80e;}
+#results u, #peepModal .modal-body u{
+	text-decoration: none; background-color: #eed80e;
+}
+
+.modal-content .close{
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	z-index: 1000;
+}
 
 .card {
 	margin-top: .5rem;

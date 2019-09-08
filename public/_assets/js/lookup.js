@@ -39,6 +39,32 @@ function lookup(){
     return false;
 }
 
+function peepCard(code){
+    $('#peepModal .modal-body').html('');
+    $('#peepModal').modal('show');
+
+    $.get(
+        '/api/v1/corpus/lookup/',
+        {"keyword":code},
+        function(data){
+            if(data.length == 0) {
+                return;
+            }
+            var article = data[0].article;
+            article = article.replace(/\n/g,"<br/>\n");
+            
+            $('#peepModal .modal-body').html(article);
+            $('#peepModal .modal-body a').click(
+                function (e){
+                    e.preventDefault();
+                    var code = $(this).attr('href').replace(/#/,'');    
+                    peepCard(code);
+                }
+            );
+        }
+    );
+}
+
 function getCards(keyword,clbk){
     
     if(typeof clbk == typeof void 0){
@@ -56,15 +82,16 @@ function getCards(keyword,clbk){
             if(!keyword.match(/^[A0-9-]+$/)){
                 article = article.replace(new RegExp('('+keyword+')','gi'),'<u>$1</u>');
             }
-            article = article.replace(/&lt;&lt;([^|]+)\|([^&]+)&gt;&gt;/,'<a href="#$1">$2</a>')
+            
             html += article;
         });
 
         $("#results").html(html);
         $('#results a').click(
-            function (){
-                var code = $(this).attr('href');
-                getCards(code.replace(/#/,''));
+            function (e){
+                e.preventDefault(); 
+                var code = $(this).attr('href').replace(/#/,'');                           
+                peepCard(code);
             }
         );
         clbk();
@@ -73,6 +100,7 @@ function getCards(keyword,clbk){
 
 function onhashchange(){
     var keyword = window.location.hash;
+    $('#peepModal').modal('hide');
     if(keyword.length > 0){
         $('#notes').hide();
         $('#keyword').val(decodeURI(keyword.substr(1)));
@@ -88,4 +116,5 @@ $(window).on('hashchange', onhashchange);
 
 $(document).ready(function(){
     onhashchange();
+    $('#peepModal').modal({'show': false});
 });
