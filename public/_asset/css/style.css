@@ -51,6 +51,17 @@ input:focus::placeholder{
 	overflow-wrap: break-word;
 }
 
+#reset-btn{
+	display: none;
+	position: absolute;
+	right: 42px;
+	top: 12px;
+	background-color: #ffffff;
+	width: 36px;
+	text-align: center;
+	cursor: pointer;
+}
+
 #search-btn{
 	position: absolute;
 	right: 2px;

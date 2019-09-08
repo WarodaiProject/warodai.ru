@@ -25,13 +25,14 @@ function lookup(){
     var keyword = $('#keyword').val();
     if(!keyword) return;
 
-    $('#results').fadeOut();
-    $('#loading').fadeIn();
+    $('#results').hide();
+    $('#loading').show();
+
     getCards(
         keyword,
         function(){
-            $('#loading').fadeOut();
-            $('#results').fadeIn('slow');
+            $('#loading').hide();
+            $('#results').fadeIn();           
         }
     );
 
@@ -119,6 +120,20 @@ $(window).on('hashchange', onhashchange);
 $(document).ready(function(){
     onhashchange();
     $('#peepModal').modal({'show': false});
+
+    $('#reset-btn').on('click',function(){
+        $('#keyword').val('').focus();
+    });
+
+    $('#keyword')
+        .on('focus',function(){
+            if($(this).val()){
+                $('#reset-btn').fadeIn();
+            }
+        })
+        .on('blur', function(){
+            $('#reset-btn').fadeOut();
+        });
 
     $('.nav-link').each(function(){
         var t = $(this);

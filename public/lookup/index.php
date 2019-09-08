@@ -9,6 +9,10 @@
                 id="keyword"
                 placeholder="японское или русское слово"
             >
+
+            <div id="reset-btn">
+                <i class="far fa-times-circle"></i>
+            </div> 
         
             <div id="search-btn" onclick="lookup()">
                 <i class="fa fa-search"></i>
