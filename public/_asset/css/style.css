@@ -115,3 +115,16 @@ input:focus::placeholder{
 	width: 33%;
 	margin: 0px auto 0px auto;
 }
+
+#issue-range{
+	overflow: auto;
+	max-height: 250px;
+}
+
+#issue-range pre{
+	overflow: visible;
+}
+
+#issueModal .loading{
+	display: none;
+}

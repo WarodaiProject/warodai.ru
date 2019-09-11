@@ -2,6 +2,8 @@ var w=window;
 var d=w.document;
 var b=d.body; 
 
+var misprintLock = false;
+
 function getMisprintRngLmt(o){
 	//предотвращение бесконечной рекурсии
 	if(o.tagName && o.getAttribute('id')=='results'){
@@ -119,7 +121,10 @@ function showMisprintRep(e){
 }
 
 function sendMisprint(){
-
+    if(misprintLock) return;
+    misprintLock = true;
+    $('#issueModal .loading').show();
+    
     $.post(
         '/api/v1/corpus/issue/index.php',
         {
@@ -127,14 +132,16 @@ function sendMisprint(){
             'comments':$('#issue-comment').val()
         },
         function(data){
+            misprintLock = false;
+            $('#issueModal .loading').hide();
+            if(data.message){
+                alert(data.message);
+                return;
+            }
             $("#issueModal").modal('hide');
         }
-    ).fail(function(){
-
-    });
-}
-
-    
+    );
+}    
 
 function initLookup(e){
     var f=0;
@@ -213,7 +220,12 @@ function getCards(keyword,clbk){
         keyword = keyword.replace(/\*$/,'');
         keyword = keyword.replace(/\*/,'.*?');
         $.each(data,function(){
-            article = '<div class="card"><div class="card-body">'+this.article.replace(/\n/g,"<br/>\n")+'</div></div>';
+            article = '\
+                <div class="card"> \
+                     \
+                    <div class="card-body">'+this.article.replace(/\n/g,"<br/>\n")+'</div>\
+                </div>\
+            ';
 
             if(!keyword.match(/^[A0-9-]+$/)){
                 article = article.replace(new RegExp('('+keyword+')','gi'),'<u>$1</u>');
@@ -229,7 +241,8 @@ function getCards(keyword,clbk){
                 var code = $(this).attr('href').replace(/#/,'');                           
                 peepCard(code);
             }
-        );
+        )
+       
         clbk();
     },'json');
 }

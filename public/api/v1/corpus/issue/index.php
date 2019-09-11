@@ -19,7 +19,7 @@ if($_POST['range'] && $_POST['comments']){
 
     $db->issues->insertOne([
         'article'=>$article,
-        'comments'=>$comments,
+        'comment'=>$comments,
         'date'=>$date
     ]);
     
@@ -28,10 +28,9 @@ if($_POST['range'] && $_POST['comments']){
     $title = str_replace('<b>','',$title);
     $title = str_replace('</b>','',$title);
     $issue = [
-        'private_token'=>'5M6NfavdBfFcfK9ZzCVr',
+        'private_token'=>'fRuVjP86yCYmB5ntzpzA',
         'title'=>$title,
-        'description'=>$article.$comments,
-        'labels'=>'Ошибки от Warodai Lookup'
+        'description'=>$article.$comments
     ];
     $ch = curl_init( 'https://gitlab.warodai.ru/api/v4/projects/tools%2Ftest/issues' );    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');

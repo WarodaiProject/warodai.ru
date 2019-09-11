@@ -1,6 +1,6 @@
 <?php include('../_inc/header.php') ?>
-<form onsubmit="return false">
-    <div class="position-relative">
+    <form onsubmit="return false">
+        <div class="position-relative">
             <input 
                 type="text" 
                 class="form-control form-control-lg" 
@@ -18,7 +18,7 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-
+        <small class="d-none d-md-inline">Если у вас есть исправление, добавление или иной комментарий к статье, выделите любой ее фрагмент и нажмите <b>Ctrl+Enter</b>.</small>
         
     </form>
 
@@ -74,15 +74,17 @@
                     </button>
                 </div>          
                 <div class="modal-body">
-                    <label>Фрагмент с выделенной ошибкой:</label>
+                    <label><b>Статья с выделенным фрагментом:</b></label>
                     <div id="issue-range"></div>
 
-                    <label>Комментарий</label>
+                    <label class="mt-3"><b>Комментарий</b></label>
                     <textarea id="issue-comment" class="form-control"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" onclick="sendMisprint()">Отправить</button>
+                    <button type="button" class="btn btn-primary" onclick="sendMisprint()">
+                        <i class="fas fa-circle-notch fa-spin loading"></i> Отправить
+                    </button>
                 </div>
             </div>
         </div>
