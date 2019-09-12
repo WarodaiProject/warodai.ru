@@ -8,18 +8,18 @@ $response = [];
 $responseStatus = '200 Ok';
 
 
-if($_POST['range'] && $_POST['comments']){
+if($_POST['range'] && $_POST['comment']){
     // Сохранение в базу данных
     $mongo = new MongoDB\Client("mongodb://localhost:27017");
     $db = $mongo->warodai;
     
-    $article =  '<b>Статья:</b><br/>'.str_replace('<b>','<b style="color:red">',str_replace('<B>','<b>',$_POST['range'])).'<hr/>';
-    $comments = '<b>Комментарии:</b><br/>'.$_POST['comments'].'<BR>'.$_SERVER['REMOTE_ADDR'];
+    $article = '<b>Статья:</b><br/>'.str_replace('<b>','<b style="color:red">',str_replace('<B>','<b>',$_POST['range'])).'<hr/>';
+    $comment = '<b>Комментарии:</b><br/>'.$_POST['comment'];
     $date = date('Y-m-d H:i:s');
 
     $db->issues->insertOne([
         'article'=>$article,
-        'comment'=>$comments,
+        'comment'=>$comment,
         'date'=>$date
     ]);
     
@@ -30,9 +30,9 @@ if($_POST['range'] && $_POST['comments']){
     $issue = [
         'private_token'=>'fRuVjP86yCYmB5ntzpzA',
         'title'=>$title,
-        'description'=>$article.$comments
+        'description'=>$article.$comment
     ];
-    $ch = curl_init( 'https://gitlab.warodai.ru/api/v4/projects/tools%2Ftest/issues' );    
+    $ch = curl_init( 'https://gitlab.warodai.ru/api/v4/projects/warodai%2Fwarodai-source/issues' );    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($issue) );  
 

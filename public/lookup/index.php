@@ -18,11 +18,11 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-        <small class="d-none d-md-inline">Если у вас есть исправление, добавление или иной комментарий к статье, выделите любой ее фрагмент и нажмите <b>Ctrl+Enter</b>.</small>
+        <p class="mt-2 text-muted" id="issueNote"><b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, выделите любой ее фрагмент и нажмите <b>Ctrl+Enter</b>.</p>
         
     </form>
 
-    <div id="results" class="container mt-4 px-0"></div>
+    <div id="results" class="container mt-3 px-0"></div>
 
     <div id="loading">
         <i class="fas fa-circle-notch fa-spin"></i>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" onclick="sendMisprint()">
+                    <button type="button" class="btn btn-primary" onclick="sendIssue()">
                         <i class="fas fa-circle-notch fa-spin loading"></i> Отправить
                     </button>
                 </div>
