@@ -195,7 +195,7 @@ function peepCard(code){
 
     $.get(
         '/api/v1/corpus/lookup/',
-        {"keyword":code},
+        {"keyword":code, 'corpus': 'warodai'},
         function(data){
             if(data.length == 0) {
                 return;
@@ -220,7 +220,7 @@ function getCards(keyword,clbk){
     if(typeof clbk == typeof void 0){
         clbk = function(){};
     }
-    $.get('/api/v1/corpus/lookup/',{"keyword":keyword},function(data){
+    $.get('/api/v1/corpus/lookup/',{"keyword":keyword, 'corpus':'warodai'},function(data){
 
         var html = '', article = '';
         keyword = keyword.replace(/^\*/,'');

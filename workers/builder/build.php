@@ -5,9 +5,14 @@ require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
 $repos = [
     'warodai'=>[
-        'git'=>'/var/opt/gitlab/git-data/repositories/warodai/warodai-source.git',
+        'git'=>dirname(__FILE__).'/../../repos/bjrd-source.git',
         'output_file'=>dirname(__FILE__).'/../../public/download/ewarodai.txt',
         'output_arch'=>dirname(__FILE__).'/../../public/download/warodai_txt.zip'
+    ],
+    'zrjiten'=>[
+        'git'=>dirname(__FILE__).'/../../repos/zrjiten-source.git',
+        'output_file'=>dirname(__FILE__).'/../../public/download/zrjiten.txt',
+        'output_arch'=>dirname(__FILE__).'/../../public/download/zrjiten_txt.zip'
     ]
 ];
 
@@ -20,12 +25,17 @@ $m = new MongoDB\Client("mongodb://localhost:27017");
 $coll = $m->warodai->corpus;
 
 foreach($repos as $corpus=>$conf){
+    print("Start process ".$corpus.".\n");
+
     $repoPath = $conf['git'];
     $lastRepoDate = '1970-01-01 00:00:01';
     $lastArchDate = '1970-01-01 00:00:01';
     $entries = [];
     $output = '';
     $e = [];
+
+    exec("git --git-dir {$repoPath} fetch origin master");
+      
     exec("git --git-dir {$repoPath} log -n 1", $e);
     foreach($e as $str){
         if(preg_match('/Date:\s+(.+)/',$str,$matches)){
@@ -36,10 +46,10 @@ foreach($repos as $corpus=>$conf){
     if(file_exists($conf['output_arch'])){
         $lastArchDate = date('Y-m-d H:i:s',filemtime($conf['output_arch']));
     }
-
+    
     if($lastRepoDate <= $lastArchDate){
         print("Archive file for {$corpus} is ahead of or equal to repo. Skipping DB and file update.\n");
-        exit;
+        continue;
     }
 
     scanGitDir($repoPath,$entries,'HEAD');
@@ -91,7 +101,7 @@ EOD;
         print ("Cannot create archive file {$conf['output_arch']}\n");
     }
 
-    print("Done.");
+    print("Done.\n");
 }
 
 //------------------Functions-------------------//
@@ -130,6 +140,19 @@ function extractTokens_warodai($article){
         else{
             $tokens = array_merge($tokens,extractWarodaiRussianTokens($string));
         }
+    }
+    return $tokens;
+}
+
+function extractTokens_zrjiten($article){
+    $strings = explode("\n",$article);
+    $tokens = explode(', ', $strings[0]);
+    for($i=0; $i < count($tokens); $i++){
+        $tokens[$i] = trim(
+            strip_tags(
+                preg_replace('/[IV]+/','',$tokens[$i])
+            )
+        );
     }
     return $tokens;
 }

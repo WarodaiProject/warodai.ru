@@ -8,6 +8,7 @@ $response = [];
 $responseStatus = '200 Ok';
 
 $keyword = $_REQUEST['keyword'];
+$corpus = $_REQUEST['corpus'];
 $bareKeyword = str_replace('*','',$keyword);
 if (!$keyword || empty($bareKeyword)) {
     $response = ['message'=>'Вы не указали параметр keyword'];
@@ -33,6 +34,9 @@ else{
     $listedCards = [];
 
     foreach($keywordQueries as $keywordQuery){
+        if($corpus){
+            $keywordQuery['corpus'] = $corpus;
+        }
         $cursor = $db->corpus->find(
             $keywordQuery,
             [

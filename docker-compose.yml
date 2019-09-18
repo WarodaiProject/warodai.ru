@@ -9,4 +9,11 @@ services:
     volumes:
       - /d/Dev/nbyars/warodai.ru/public:/var/www/html
       - /d/Dev/nbyars/warodai.ru/vendor:/var/www/vendor
+      - /d/Dev/nbyars/warodai.ru/workers:/var/www/workers
+      - /d/Dev/nbyars/warodai.ru/repos:/var/www/repos
     network_mode: host
+  mongo:
+    image: mongo:3.4
+    volumes:
+        - /var/data/mongo/local:/data/db
+    network_mode: "host"

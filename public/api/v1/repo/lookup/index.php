@@ -6,8 +6,8 @@ setlocale(LC_ALL,$locale);
 putenv('LC_ALL='.$locale);
 
 $repos = [
-    'warodai'=>'/var/opt/gitlab/git-data/repositories/warodai/warodai-source.git',
-    'zrjiten'=>'/var/opt/gitlab/git-data/repositories/zrjiten/zrjiten-source.git'
+    'warodai'=>dirname(__FILE__).'/../../../../../repos/bjrd-source.git',
+    'zrjiten'=>dirname(__FILE__).'/../../../../../repos/zrjiten-source.git'
 ];
 
 $vowels = ['а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я'];
@@ -28,15 +28,15 @@ else{
 
     foreach($repos as $corpus => $repoPath){
         if(preg_match('/^[A0-9-]+$/',$keyword)){
-            $gitCommand = "sudo git --git-dir {$repoPath} grep -n '' HEAD -- */{$keyword}.txt | grep txt:1:";
+            $gitCommand = "git --git-dir {$repoPath} grep -n '' HEAD -- */{$keyword}.txt | grep txt:1:";
         }
         else{            
-            $gitCommand = "sudo git --git-dir {$repoPath} grep -En '{$keywordReg}' HEAD | grep txt:1:";
+            $gitCommand = "git --git-dir {$repoPath} grep -En '{$keywordReg}' HEAD | grep txt:1:";
         }
 
         $rawResults = [];
         exec($gitCommand,$rawResults);
-
+       
         foreach($rawResults as $rawResult){
             if(preg_match('/HEAD:[A0-9-]+\/([A0-9-]+).txt:1:(.+)/',$rawResult,$matches)){
                 $results[] = [
