@@ -27,19 +27,14 @@ if($_POST['range'] && $_POST['comment']){
     $title = explode("\n",trim($_POST['range']))[0];
     $title = str_replace('<b>','',$title);
     $title = str_replace('</b>','',$title);
-    $issue = [        
+    $issue = [
+        'private_token'=>'fRuVjP86yCYmB5ntzpzA',
         'title'=>$title,
-        'body'=>$article.$comment,
-        'labels'=>['Ошибки от Warodai Lookup']
+        'description'=>$article.$comment
     ];
-    $ch = curl_init( 'https://api.github.com/repos/warodai/bjrd-source/issues' );    
+    $ch = curl_init( 'https://gitlab.warodai.ru/api/v4/projects/warodai%2Fwarodai-source/issues' );    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($issue) ); 
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Authorization: token 4f4f3f6c7ef10e1af4bd4dd499b1e7d7183bfda1',
-        'User-Agent: warodai',
-        'Content-Type: application/json'  
-    )); 
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($issue) );  
 
     curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
     curl_setopt( $ch, CURLOPT_HEADER, true );
@@ -49,9 +44,7 @@ if($_POST['range'] && $_POST['comment']){
     $status = curl_getinfo( $ch ); 
     $header = trim(substr($response, 0, $status['header_size']));
     $body = substr($response, $status['header_size']);
-    
-    $response = json_decode($body);
-    $responseStatus = $status;
+
     curl_close( $ch );
 }
 else{
@@ -64,4 +57,4 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Max-Age: 1000');
 header('Content-Type: application/json');
-print(json_encode($response));
+print(json_encode($response,JSON_UNESCAPED_UNICODE));

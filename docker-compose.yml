@@ -11,6 +11,7 @@ services:
       - /d/Dev/nbyars/warodai.ru/vendor:/var/www/vendor
       - /d/Dev/nbyars/warodai.ru/workers:/var/www/workers
       - /d/Dev/nbyars/warodai.ru/repos:/var/www/repos
+      - /d/Dev/nbyars/warodai-editor:/var/www/html/editor
     network_mode: host
   mongo:
     image: mongo:3.4
