@@ -9,7 +9,7 @@ $_CONF = [
     'gitlab_private_token' => '',
     'gitlab_api_root' => 'https://gitlab.warodai.ru/api/v4',
     'gitlab_bjrd_source' => 'warodai/warodai-source',
-    'gitlab_access_token_endpoint' => '',
+    'gitlab_access_token_endpoint' => 'https://gitlab.warodai.ru/oauth/token',
     'gitlab_client_secret' => '',
     
     'github_private_token' => '',
