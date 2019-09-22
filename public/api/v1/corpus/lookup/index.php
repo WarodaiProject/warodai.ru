@@ -3,6 +3,7 @@ error_reporting(E_ERROR | E_PARSE);
 ini_set('display_errors', 'Off');
 ini_set("log_errors", 1);
 require '../../../../../vendor/autoload.php';
+require '../../../../../etc/config.php';
 
 $response = [];
 $responseStatus = '200 Ok';
@@ -15,7 +16,7 @@ if (!$keyword || empty($bareKeyword)) {
     $responseStatus = '400 Bad Request';
 }
 else{
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client($_CONF['mongo_url']);
     $db = $mongo->warodai;
 
     $keywordQueries = [];

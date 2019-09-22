@@ -1,14 +1,12 @@
 <?php
+require '../../../../../etc/config.php';
 
 //Установка локали - иначе неверно обрабатываются символы с регулярках в grep
 $locale='C.UTF-8';
 setlocale(LC_ALL,$locale);
 putenv('LC_ALL='.$locale);
 
-$repos = [
-    'warodai'=>dirname(__FILE__).'/../../../../../repos/bjrd-source.git',
-    'zrjiten'=>dirname(__FILE__).'/../../../../../repos/zrjiten-source.git'
-];
+$repos = $_CONF['corpus_local_repos'];
 
 $vowels = ['а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я'];
 

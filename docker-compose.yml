@@ -7,11 +7,12 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /d/Dev/nbyars/warodai.ru/public:/var/www/html
-      - /d/Dev/nbyars/warodai.ru/vendor:/var/www/vendor
-      - /d/Dev/nbyars/warodai.ru/workers:/var/www/workers
-      - /d/Dev/nbyars/warodai.ru/repos:/var/www/repos
-      - /d/Dev/nbyars/warodai-editor:/var/www/html/editor
+      - ./public:/var/www/html
+      - ./etc:/var/www/etc
+      - ./vendor:/var/www/vendor
+      - ./workers:/var/www/workers
+      - ./repos:/var/www/repos
+      - ../warodai-editor:/var/www/html/editor
     network_mode: host
   mongo:
     image: mongo:3.4

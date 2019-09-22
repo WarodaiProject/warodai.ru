@@ -1,3 +1,4 @@
 logs/*
 repos/*
 .idea
+etc/config.php

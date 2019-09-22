@@ -3,6 +3,7 @@ error_reporting(E_ERROR | E_PARSE);
 ini_set('display_errors', 'Off');
 ini_set("log_errors", 1);
 require '../../../../../vendor/autoload.php';
+require '../../../../../etc/config.php';
 
 $response = [];
 $responseStatus = '200 Ok';
@@ -10,7 +11,7 @@ $responseStatus = '200 Ok';
 
 if($_POST['range'] && $_POST['comment']){
     // Сохранение в базу данных
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client($_CONF['mongo_url']);
     $db = $mongo->warodai;
     
     $article = '<b>Статья:</b><br/>'.str_replace('<b>','<b style="color:red">',str_replace('<B>','<b>',$_POST['range'])).'<hr/>';
@@ -32,11 +33,11 @@ if($_POST['range'] && $_POST['comment']){
         'body'=>$article.$comment,
         'labels'=>['Ошибки от Warodai Lookup']
     ];
-    $ch = curl_init( 'https://api.github.com/repos/warodai/bjrd-source/issues' );    
+    $ch = curl_init($_CONF['github_api_root'].'/repos/'.$_CONF['github_bjrd_source'].'/issues');    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($issue) ); 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Authorization: token 4f4f3f6c7ef10e1af4bd4dd499b1e7d7183bfda1',
+        'Authorization: token '.$_CONF['github_private_token'],
         'User-Agent: warodai',
         'Content-Type: application/json'  
     )); 

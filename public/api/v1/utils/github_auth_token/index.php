@@ -1,11 +1,15 @@
 <?php
+    require '../../../../../etc/config.php';
+
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Max-Age: 1000');
 
-    $ch = curl_init('https://github.com/login/oauth/access_token');
+    $ch = curl_init($_CONF['github_access_token_endpoint']);
 
     $query = $_POST;
+
+    $query['client_secret'] = $_CONF['github_client_secret'];
 
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');  
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));

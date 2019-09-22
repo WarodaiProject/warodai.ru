@@ -3,6 +3,7 @@ error_reporting(E_ERROR | E_PARSE);
 ini_set('display_errors', 'Off');
 ini_set("log_errors", 1);
 require '../../../../../vendor/autoload.php';
+require '../../../../../etc/config.php';
 
 $response = [];
 $responseStatus = '200 Ok';
@@ -10,7 +11,7 @@ $responseStatus = '200 Ok';
 
 if($_POST['range'] && $_POST['comment']){
     // Сохранение в базу данных
-    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $mongo = new MongoDB\Client($_CONF['mongo_url']);
     $db = $mongo->warodai;
     
     $article = '<b>Статья:</b><br/>'.str_replace('<b>','<b style="color:red">',str_replace('<B>','<b>',$_POST['range'])).'<hr/>';
@@ -28,11 +29,11 @@ if($_POST['range'] && $_POST['comment']){
     $title = str_replace('<b>','',$title);
     $title = str_replace('</b>','',$title);
     $issue = [
-        'private_token'=>'fRuVjP86yCYmB5ntzpzA',
+        'private_token'=>$_CONF['gitlab_private_token'],
         'title'=>$title,
         'description'=>$article.$comment
     ];
-    $ch = curl_init( 'https://gitlab.warodai.ru/api/v4/projects/warodai%2Fwarodai-source/issues' );    
+    $ch = curl_init( $_CONF['gitlab_api_root'].'/projects/'.urlencode($_CONF['gitlab_bjrd_source']).'/issues' );    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($issue) );  
 
