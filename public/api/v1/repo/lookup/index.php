@@ -24,7 +24,8 @@ if (!$keyword) {
 else{
     $results = [];
 
-    foreach($repos as $corpus => $repoPath){
+    foreach($repos as $corpus => $repo){
+        $repoPath = $repo['git'];
         if(preg_match('/^[A0-9-]+$/',$keyword)){
             $gitCommand = "git --git-dir {$repoPath} grep -n '' HEAD -- */{$keyword}.txt | grep txt:1:";
         }

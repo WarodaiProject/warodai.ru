@@ -1,27 +1,16 @@
 <?php
-
+require '../../etc/config.php';
 require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
 
-$repos = [
-    'warodai'=>[
-        'git'=>dirname(__FILE__).'/../../repos/bjrd-source.git',
-        'output_file'=>dirname(__FILE__).'/../../public/download/ewarodai.txt',
-        'output_arch'=>dirname(__FILE__).'/../../public/download/warodai_txt.zip'
-    ],
-    'zrjiten'=>[
-        'git'=>dirname(__FILE__).'/../../repos/zrjiten-source.git',
-        'output_file'=>dirname(__FILE__).'/../../public/download/zrjiten.txt',
-        'output_arch'=>dirname(__FILE__).'/../../public/download/zrjiten_txt.zip'
-    ]
-];
+$repos = $_CONF['corpus_local_repos'];
 
 //Установка локали - иначе неверно обрабатываются символы с регулярках в grep
 $locale='C.UTF-8';
 setlocale(LC_ALL,$locale);
 putenv('LC_ALL='.$locale);
 
-$m = new MongoDB\Client("mongodb://localhost:27017");
+$m = new MongoDB\Client($_CONF['mongo_url']);
 $coll = $m->warodai->corpus;
 
 foreach($repos as $corpus=>$conf){
