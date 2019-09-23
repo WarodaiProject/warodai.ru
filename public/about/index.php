@@ -15,7 +15,7 @@
         <li>広辞苑 第五版 CD-ROM版</li>
     </ol>
     <p>Словарь содержит около 95 000 статей. Общее число японских лексем - около 120 000, русских значений - около 150 000.</p>
-    <p>Проект был осуществлен группой энтузиастов в 2005-2008 годах и распространяется под лицензией <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License</a></p>
+    <p>Проект был осуществлен группой энтузиастов в 2006-2008 годах и распространяется под лицензией <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License</a></p>
     <p>Работа над словарем продолжается в разделе <a href="https://github.com/warodai">https://github.com/warodai</a></p>
 
 <?php include('../_inc/footer.php') ?>
