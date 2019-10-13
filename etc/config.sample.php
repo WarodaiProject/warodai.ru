@@ -20,14 +20,9 @@ $_CONF = [
     
     'corpus_local_repos' => [
         'warodai'=>[
-            'git'=>dirname(__FILE__).'/../repos/bjrd-source.git',
+            'git'=>dirname(__FILE__).'/../repos/bjrd-source',
             'output_file'=>dirname(__FILE__).'/../public/download/ewarodai.txt',
             'output_arch'=>dirname(__FILE__).'/../public/download/warodai_txt.zip'
-        ],
-        'zrjiten'=>[
-            'git'=>dirname(__FILE__).'/../repos/zrjiten-source.git',
-            'output_file'=>dirname(__FILE__).'/../public/download/zrjiten.txt',
-            'output_arch'=>dirname(__FILE__).'/../public/download/zrjiten_txt.zip'
         ]
     ]
 ];

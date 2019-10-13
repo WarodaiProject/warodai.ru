@@ -1,5 +1,5 @@
 <?php
-require '../../etc/config.php';
+require_once(dirname(__FILE__).'/../../etc/config.php');
 require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
 
@@ -23,9 +23,9 @@ foreach($repos as $corpus=>$conf){
     $output = '';
     $e = [];
 
-    exec("git --git-dir {$repoPath} fetch origin master");
+    exec("git --git-dir {$repoPath}/.git pull origin master");
       
-    exec("git --git-dir {$repoPath} log -n 1", $e);
+    exec("git --git-dir {$repoPath}/.git log -n 1", $e);
     foreach($e as $str){
         if(preg_match('/Date:\s+(.+)/',$str,$matches)){
             $lastRepoDate = (new DateTime($matches[1]))->format('Y-m-d H:i:s');
@@ -41,8 +41,9 @@ foreach($repos as $corpus=>$conf){
         continue;
     }
 
-    scanGitDir($repoPath,$entries,'HEAD');
-    ksort($entries);
+    print("Start building.\n");
+    scanCorpDir($repoPath,$entries);
+    ksort($entries);    
 
     $output = <<<EOD
 *******************************************************************************************************************
@@ -95,20 +96,24 @@ EOD;
 
 //------------------Functions-------------------//
 
-function scanGitDir($repoPath,&$entries,$ref){
-    if(empty($ref)){
-        $ref = 'HEAD';
+function scanCorpDir($path,&$entries){
+    if ($handle = opendir($path)) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry{0} != ".") {
+                if(is_file("{$path}/{$entry}")){
+                    $code = explode('.',$entry)[0];
+                    $entries[$code] =  trim(file_get_contents("{$path}/{$entry}"));
+                }
+                else{
+                    scanCorpDir("{$path}/{$entry}",$entries);
+                }
+            }
+        }
+        closedir($handle);
     }
-
-    $e = [];
-    exec("git --git-dir {$repoPath} ls-tree --name-only -r {$ref}", $e);
-
-    foreach($e as $s){
-        $_t = [];
-        //print("Extracting {$s} - done\n");
-        exec("git --git-dir {$repoPath} show {$ref}:{$s}",$_t);
-        $code = explode('.',explode('/',$s)[1])[0];
-        $entries[$code] =  join("\n",$_t);
+    else{
+        print('Невозможно открыть '.$path.'. Процедура генерации прервана.');
+        exit(0);
     }
 }
 
