@@ -27,10 +27,10 @@ else{
     foreach($repos as $corpus => $repo){
         $repoPath = $repo['git'];
         if(preg_match('/^[A0-9-]+$/',$keyword)){
-            $gitCommand = "git --git-dir {$repoPath} grep -n '' HEAD -- */{$keyword}.txt | grep txt:1:";
+            $gitCommand = "git --git-dir {$repoPath}/.git grep -n '' HEAD -- */{$keyword}.txt | grep txt:1:";
         }
         else{            
-            $gitCommand = "git --git-dir {$repoPath} grep -En '{$keywordReg}' HEAD | grep txt:1:";
+            $gitCommand = "git --git-dir {$repoPath}/.git grep -En '{$keywordReg}' HEAD | grep txt:1:";
         }
 
         $rawResults = [];
