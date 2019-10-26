@@ -16,7 +16,11 @@ $_CONF = [
     'github_api_root' => 'https://api.github.com',
     'github_bjrd_source' => 'warodai/bjrd-source',
     'github_access_token_endpoint' => 'https://github.com/login/oauth/access_token',
-    'github_client_secret' => '',
+    'github_client_secrets' => [
+        'production' => '',
+        'localhost' => '',
+        'ngrok' => ''
+    ],  
     
     'corpus_local_repos' => [
         'warodai'=>[

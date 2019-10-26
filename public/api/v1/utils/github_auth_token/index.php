@@ -9,7 +9,14 @@
 
     $query = $_POST;
 
-    $query['client_secret'] = $_CONF['github_client_secret'];
+    if($_GET['app']){
+        $app = $_GET['app'];
+    }
+    else{
+        $app = 'production';
+    }
+
+    $query['client_secret'] = $_CONF['github_client_secrets'][$app];
 
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');  
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
