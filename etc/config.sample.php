@@ -19,7 +19,8 @@ $_CONF = [
     'github_client_secrets' => [
         'production' => '',
         'localhost' => '',
-        'ngrok' => ''
+        'ngrok' => '',
+        'github-pages' => ''
     ],  
     
     'corpus_local_repos' => [
