@@ -20,7 +20,7 @@ $_CONF = [
         'production' => '',
         'localhost' => '',
         'ngrok' => '',
-        'github-pages' => ''
+        'github.io' => ''
     ],  
     
     'corpus_local_repos' => [
