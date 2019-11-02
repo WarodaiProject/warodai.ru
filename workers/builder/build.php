@@ -14,6 +14,9 @@ $m = new MongoDB\Client($_CONF['mongo_url']);
 $coll = $m->warodai->corpus;
 
 foreach($repos as $corpus=>$conf){
+    if(!$conf['build']){
+        continue;
+    }
     print("Start process ".$corpus.".\n");
 
     $repoPath = $conf['git'];
