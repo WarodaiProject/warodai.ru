@@ -19,6 +19,10 @@ foreach($repos as $corpus=>$conf){
     }
     print("Start process ".$corpus.".\n");
 
+    $sort = 'code';
+    if($conf['sort']){
+        $sort = $conf['sort'];
+    }
     $repoPath = $conf['git'];
     $lastRepoDate = '1970-01-01 00:00:01';
     $lastArchDate = '1970-01-01 00:00:01';
@@ -46,7 +50,26 @@ foreach($repos as $corpus=>$conf){
 
     print("Start building.\n");
     scanCorpDir($repoPath,$entries);
-    ksort($entries);    
+    
+    if($sort == 'code'){
+        ksort($entries);
+    }
+    else{
+        try{
+            if($sort == 'kana'){
+                uasort($entries, 'sortByKana');
+            }
+            if($sort == 'kiriji'){
+                uasort($entries, 'sortByKiriji');
+            }
+            if($sort == 'header'){
+                uasort($entries, 'sortByHeader');
+            }
+        }
+        catch (Exception $e){
+            die("Ошибка при сортировке: ".$e."\n");
+        }     
+    }
 
     $output = <<<EOD
 *******************************************************************************************************************
@@ -120,9 +143,35 @@ function scanCorpDir($path,&$entries){
     }
 }
 
+function sortByKana($a, $b){
+    return sortCard($a, $b, 'kana');
+}
+
+function sortByKiriji($a, $b){
+    return sortCard($a, $b, 'kiriji');
+}
+
+function sortByHeader($a, $b){
+    $a = explode("\n", $a)[0];
+    $b = explode("\n", $b)[0];
+
+    return ($a < $b) ? -1 : 1;
+}
+
+function sortCard($a, $b, $field='kana'){
+    $a = parseHeader(explode("\n", $a)[0])[$field][0];        
+    $b = parseHeader(explode("\n", $b)[0])[$field][0];
+
+    return ($a < $b) ? -1 : 1;
+}
+
 function extractTokens($article, $corpus){
     $func = "extractTokens_$corpus";
     return $func($article);
+}
+
+function extractTokens_bjrd($article){
+    return extractTokens_warodai($article);
 }
 
 function extractTokens_warodai($article){
@@ -157,16 +206,9 @@ function extractTokens_zrjiten($article){
 function extractWarodaiHeaderTokens($headerString){
     $tokens = [];
 
-    //Разбираем заголовок с помощью вот такого регулярного выражения
-    $headerReg = '/^ *(([\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{31f0}-\x{31ff}…A-Z.,･！ ]+)(【([^】]+)】)? ?\(([а-яА-ЯЁёйў*,…:\[\] \x{0306}-]+)\)) *(\[([^]]+)\])?(〔([^〕]+)〕)?/u';
-
-    if(preg_match($headerReg,$headerString,$match)){
-        $tokens = array_merge($tokens,normalizeKana(explode(",", $match[2])));
-        $tokens = array_merge($tokens,normalizeKiriji(explode(",",$match[5])));
-
-        if(!empty($match[4])){
-            $tokens = array_merge($tokens, normalizeHyouki(explode(",", $match[4])));
-        }
+    $header = parseHeader($headerString);
+    foreach(['kana', 'hyouki', 'kiriji'] as $section){
+        $tokens = array_merge($tokens, $header[$section]);
     }
 
     return $tokens;
@@ -222,6 +264,31 @@ function extractWarodaiRussianTokens($string){
         }
     }
     return $tokens;
+}
+
+function parseHeader($headerString){
+    //Структура заголовка статьи
+    $header = [
+        'kana'=>[],           //неразобранный массив написаний каной
+        'hyouki'=>[],         //неразобранный массив написаний хё:ки
+        'kiriji'=>[],         //неразобранный массив написаний киридзи
+    ];
+
+    //Разбираем заголовок с помощью вот такого регулярного выражения
+    $headerReg = '/^ *(([\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{31f0}-\x{31ff}…A-Z.,･！ ]+)(【([^】]+)】)? ?\(([а-яА-ЯЁёйў*,…:\[\] \x{0306}-]+)\)) *(\[([^]]+)\])?(〔([^〕]+)〕)?/u';
+
+    //Заполняем структуру данных заголовка статьи
+    if(preg_match($headerReg,$headerString,$match)){
+        $header['kana'] = normalizeKana(explode(",", $match[2]));
+        $header['hyouki'] = (empty($match[4])) ? [] : normalizeHyouki(explode(",", $match[4]));
+        $header['kiriji'] = normalizeKiriji(explode(",",$match[5]));    
+    }
+    else{
+        //Заголовок не подошел под регулярное выражение.
+        throw new Exception('Article has malformed header');
+    }
+
+    return $header;
 }
 
 function normalizeKana($kana){
