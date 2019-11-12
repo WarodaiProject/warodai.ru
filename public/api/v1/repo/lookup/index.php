@@ -50,9 +50,9 @@ function searchRepo($corpus, $repo, $keyword, $keywordReg){
 
     $rawResults = [];
     exec($gitCommand,$rawResults);
-   
+    
     foreach($rawResults as $rawResult){
-        if(preg_match('/HEAD:[A0-9-]+\/([A0-9-]+).txt:1:(.+)/',$rawResult,$matches)){
+        if(preg_match('/HEAD:[A0-9\/-]+([A0-9-]+).txt:1:(.+)/',$rawResult,$matches)){
             $results[] = [
                 'code'=>$matches[1],
                 'header'=>strip_tags($matches[2]),
