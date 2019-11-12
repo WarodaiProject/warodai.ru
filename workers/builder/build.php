@@ -30,9 +30,9 @@ foreach($repos as $corpus=>$conf){
     $output = '';
     $e = [];
 
-    exec("git --git-dir {$repoPath}/.git pull origin master");
+    exec("git -C {$repoPath} pull origin master");
       
-    exec("git --git-dir {$repoPath}/.git log -n 1", $e);
+    exec("git -C {$repoPath} log -n 1", $e);
     foreach($e as $str){
         if(preg_match('/Date:\s+(.+)/',$str,$matches)){
             $lastRepoDate = (new DateTime($matches[1]))->format('Y-m-d H:i:s');
