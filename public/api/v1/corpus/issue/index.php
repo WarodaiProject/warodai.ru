@@ -31,7 +31,7 @@ if($_POST['range'] && $_POST['comment']){
     $issue = [        
         'title'=>$title,
         'body'=>$article.$comment,
-        'labels'=>['Ошибки от Warodai Lookup']
+        'labels'=>['Комментарий из warodai.ru']
     ];
     $ch = curl_init($_CONF['github_api_root'].'/repos/'.$_CONF['github_bjrd_source'].'/issues');    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
