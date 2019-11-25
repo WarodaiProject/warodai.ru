@@ -5,6 +5,7 @@ require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
 $repos = $_CONF['corpus_local_repos'];
 
+date_default_timezone_set('UTC');
 //Установка локали - иначе неверно обрабатываются символы с регулярках в grep
 $locale='C.UTF-8';
 setlocale(LC_ALL,$locale);
@@ -124,15 +125,13 @@ EOD;
 
 function scanCorpDir($path,&$entries){
     if ($handle = opendir($path)) {
-        while (false !== ($entry = readdir($handle))) {
-            if ($entry{0} != ".") {
-                if(is_file("{$path}/{$entry}")){
-                    $code = explode('.',$entry)[0];
-                    $entries[$code] =  trim(file_get_contents("{$path}/{$entry}"));
-                }
-                else{
-                    scanCorpDir("{$path}/{$entry}",$entries);
-                }
+        while (false !== ($entry = readdir($handle))) {            
+            if(is_file("{$path}/{$entry}") && preg_match('/[0-9A-]+\.txt/', $entry)){
+                $code = explode('.',$entry)[0];
+                $entries[$code] =  trim(file_get_contents("{$path}/{$entry}"));
+            }
+            elseif(preg_match('/[0-9A-]/', $entry)) {
+                scanCorpDir("{$path}/{$entry}",$entries);
             }
         }
         closedir($handle);
