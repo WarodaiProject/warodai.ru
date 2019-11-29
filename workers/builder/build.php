@@ -126,11 +126,11 @@ EOD;
 function scanCorpDir($path,&$entries){
     if ($handle = opendir($path)) {
         while (false !== ($entry = readdir($handle))) {            
-            if(is_file("{$path}/{$entry}") && preg_match('/[0-9A-]+\.txt/', $entry)){
+            if(is_file("{$path}/{$entry}") && preg_match('/^[0-9A-]+\.txt$/', $entry)){
                 $code = explode('.',$entry)[0];
                 $entries[$code] =  trim(file_get_contents("{$path}/{$entry}"));
             }
-            elseif(preg_match('/[0-9A-]/', $entry)) {
+            elseif(preg_match('/^[0-9A-]$/', $entry)) {
                 scanCorpDir("{$path}/{$entry}",$entries);
             }
         }
