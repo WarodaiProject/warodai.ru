@@ -130,7 +130,7 @@ function scanCorpDir($path,&$entries){
                 $code = explode('.',$entry)[0];
                 $entries[$code] =  trim(file_get_contents("{$path}/{$entry}"));
             }
-            elseif(preg_match('/^[0-9A-]$/', $entry)) {
+            elseif(preg_match('/^[0-9A-]+$/', $entry)) {
                 scanCorpDir("{$path}/{$entry}",$entries);
             }
         }
