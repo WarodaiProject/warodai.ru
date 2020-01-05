@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+    include('common_lib.php');
     date_default_timezone_set('UTC');
 ?>
 <html lang="ru">
@@ -45,7 +46,10 @@
                         <a class="nav-link" data-match="help" href="/help/">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-match="about" href="/about/">О проекте</a>
+                        <a class="nav-link" data-match="contrib" href="/contrib/">Участие</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-match="about" href="/about/">О словаре</a>
                     </li>
                 </ul>
             </div>
