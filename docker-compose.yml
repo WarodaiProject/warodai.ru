@@ -12,7 +12,6 @@ services:
       - ./vendor:/var/www/vendor
       - ./workers:/var/www/workers
       - ./repos:/var/www/repos
-      - ../warodai-editor:/var/www/html/editor
     network_mode: host
   mongo:
     image: mongo:3.4
