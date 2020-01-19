@@ -85,17 +85,28 @@ a.anchor {
 	font-size: 0.8rem;
 }
 
-#results s, #peepModal .modal-body s{
+#results .card-body s, #peepModal .modal-body s{
 	text-decoration: none;
 	color: red;
 }
 
-#results i, #peepModal .modal-body i{
+#results .card-body i, #peepModal .modal-body i{
 	color:green;
 }
 
-#results u, #peepModal .modal-body u{
+#results .card-body u, #peepModal .modal-body u{
 	text-decoration: none; background-color: #eed80e;
+}
+
+#results .card .card-panel{
+	position: absolute;
+	display: none;
+	right:5px;
+	top: 5px;
+}
+
+#results div.card:hover .card-panel{
+	display: block;
 }
 
 #loading{

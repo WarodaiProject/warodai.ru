@@ -18,8 +18,10 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-        <p class="mt-2 text-muted" id="issueNote"><b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, выделите любой ее фрагмент и нажмите <b>Ctrl+Enter</b>.</p>
-        
+        <p class="mt-2 text-muted" id="issueNote">
+            <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
+            нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки.
+        </p>        
     </form>
 
     <div id="results" class="container mt-3 px-0"></div>
@@ -65,20 +67,20 @@
     </div>
 
     <div class="modal fade" id="issueModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content"> 
                 <div class="modal-header">
-                    <h5 class="modal-title">Отчет об ошибке</h5>
+                    <h5 class="modal-title">Предложение изменений</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>          
                 <div class="modal-body">
-                    <label><b>Статья с выделенным фрагментом:</b></label>
-                    <div id="issue-range"></div>
+                    <label><b>Предлагаемая редакция:</b></label>
+                    <textarea id="issue-edition" class="form-control" style="height:225px"></textarea>
 
-                    <label class="mt-3"><b>Комментарий</b></label>
-                    <textarea id="issue-comment" class="form-control"></textarea>
+                    <label class="mt-3"><b>Обоснование</b></label>
+                    <textarea id="issue-comment" class="form-control" style="height:75px" placeholder="Укажите источники, на которые вы опираетесь, и сделайте выписки из них."></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

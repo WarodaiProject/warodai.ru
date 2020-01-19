@@ -3,6 +3,7 @@ var d=w.document;
 var b=d.body; 
 
 var sendingIssueLock = false;
+var currentCard = null;
 
 mobileAndTabletcheck = function() {
     var check = false;
@@ -10,133 +11,68 @@ mobileAndTabletcheck = function() {
     return check;
 }();
 
-function getIssueRngLmt(o){
-	//предотвращение бесконечной рекурсии
-	if(o.tagName && o.getAttribute('id')=='results'){
-		return o;
- 	}
-	if(o.tagName && (o.tagName.toLowerCase()=='u' || o.tagName.toLowerCase()=='i')){
-		o = o.parentNode;
-	}
-	else if(!o.tagName){
-		o = getIssueRngLmt(o.parentNode);
-	}
-	
-	return o;
+function makeDiffHTML(textA, textB) {
+    var html = '';
+    var diff = JsDiff.diffLines(textA, textB);
+
+    for (var i = 0; i < diff.length; i++) {
+        if (diff[i].added && diff[i + 1] && diff[i + 1].removed) {
+            var swap = diff[i];
+            diff[i] = diff[i + 1];
+            diff[i + 1] = swap;
+        }
+
+        if (diff[i].removed) {
+            html = html + '<s>' + diff[i].value + '</s>';
+        } else if (diff[i].added) {
+            html = html + '<b>' + diff[i].value + '</b>';
+        } else {
+            html = html + diff[i].value;
+        }
+    }
+
+    return html;
 }
 
-function checkBoundry(rng){
-    var o = rng;
-    while(!(o.tagName && o.tagName.toLowerCase()=='body')){
-        if(o.id=='results') return true;
-        
-        o = o.parentNode;   
-    }
-    return false;
-}
-    
-function getIssueRng(){    
-    var res={p:'',h:'',s:''};      
-    try{        
-        var preRng,postRng;
-        var sel=(w.getSelection) ? sel=w.getSelection() : ((document.selection) ? d.selection.createRange() : null);
-                               
-        if(sel!=null){
-            if(sel.text) {//Модель Microsoft Text Range - http://msdn.microsoft.com/en-us/library/ms535872.aspx#
-                preRng = sel.duplicate();
-                //Коллапсуем диапазон, чтобы он оказался нулевым и таким образом мы определили, внутри какого элемента
-                //находится стартовый символ выделения
-                preRng.collapse(true);
-                //А теперь растягиваем диапазон, чтобы он гарантировано начался с первого символа элемента
-                preRng.moveToElementText(getIssueRngLmt(preRng.parentElement()));
-                //И наконец доводим его конец до начала выделения, получая префикс
-                preRng.setEndPoint('EndToStart',sel);
-                
-                //Теперь проводим то же с постфиксом
-                postRng = sel.duplicate();
-			    postRng.collapse(false);      
-				postRng.moveToElementText(getIssueRngLmt(postRng.parentElement()));                      
-                postRng.setEndPoint('StartToEnd',sel);   
+function openIssueModal(e){
+    currentCard = $(this).parents('.card').data('card');
 
-                if(checkBoundry(postRng.parentElement()) && checkBoundry(preRng.parentElement())){
-                    res={p:preRng.text,h:sel.text,s:postRng.text};
-                }
-                else{
-                    return false; 
-                }
-            }
-            else{//Модель W3C Range - http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/ranges.html#Level-2-Range-Containment
-                if (sel.getRangeAt){
-                    var rng = sel.getRangeAt(0);
-                }
-                else { // Safari! У него отсутствует метод getRangeAt
-                    var rng = document.createRange();
-                    rng.setStart(sel.anchorNode,sel.anchorOffset);
-                    rng.setEnd(sel.focusNode,sel.focusOffset);		            
-                }
-
-                if(!checkBoundry(sel.anchorNode) || !checkBoundry(sel.focusNode)){
-                    return false; 
-                }
-              	            
-	            preRng = document.createRange();
-	            preRng.setStart(getIssueRngLmt(sel.anchorNode),0);
-	            preRng.setEnd(sel.anchorNode,sel.anchorOffset);
-	            
-	            postRng = document.createRange();
-	            postRng.setStart(sel.focusNode,sel.focusOffset);
-	            postRng.setEndAfter(getIssueRngLmt(sel.focusNode));	            
-	            
-	            res={
-	            	p:preRng.toString(),
-	            	h:rng.toString(),
-	            	s:postRng.toString()
-	            };	               
-            }          	
-            return res; 
-        }
-        else{
-            return false;
-        }
-    }
-    catch(e){
-        return false;
-    }
-}
-
-function showIssueReport(e){
-    var f=0;
-    var we=w.event;
-    if(we){
-        f=we.keyCode==10||(we.keyCode==13&&we.ctrlKey);
-    }
-    else{
-        if(e){
-            f=(e.which==10&&e.modifiers==2)||(e.keyCode==0&&e.charCode==106&&e.ctrlKey)||(e.keyCode==13&&e.ctrlKey);
-        }
-    }
-    
-    if(f){        
-        var g = getIssueRng();
-        if(g){
-            var s = '<pre>'+g.p+'<b>'+g.h+'</b>'+g.s+'</pre>';
-            $('#issue-range').html(s);
-            $('#issue-comment').val('');
-            $("#issueModal").modal('show');
-        }
-    }
+    $('#issue-comment').val('');
+    $('#issueModal #issue-edition').val(currentCard.article);
+    $("#issueModal").modal('show');
 }
 
 function sendIssue(){
     if(sendingIssueLock) return;
+
+    if($('#issueModal #issue-edition').val() == ''){
+        alert('Поле "Предлагаемая редакция" не заполнено.');
+        return;
+    }
+    if($('#issue-comment').val() == ''){
+        alert('Поле "Обоснование" не заполнено.');
+        return;
+    }
+    if(currentCard.article ==  $('#issueModal #issue-edition').val()){
+        if(!confirm('Вы не внесли никаких изменений в предлагаемой редакции. Вы хотите отправить только комментарий?')){
+            return;
+        }
+    }
+
     sendingIssueLock = true;
     $('#issueModal .loading').show();
     
+    // Добавляем переносы строк в конце, чтобы строки diff гарантировано разделились в конце карточки.
+    var diffHTML = '<b>Редакция</b><br>'+makeDiffHTML(currentCard.article+"\n", $('#issueModal #issue-edition').val()+"\n");
+    // Экранируем символы, которые могут привести к неверной интерпретации в Markdown
+    diffHTML = diffHTML.replace(/(\d)([).])/g,'$1\\$2');
+    var body = diffHTML + "<hr><b>Обоснование</b><br>" + $('#issue-comment').val();
+
     $.post(
         '/api/v1/corpus/issue/index.php',
         {
-            'range':$('#issue-range pre').html(),
-            'comment':$('#issue-comment').val()
+            'title': currentCard.article.split("\n")[0],
+            'body': body,
         },
         function(data){
             sendingIssueLock = false;
@@ -226,9 +162,16 @@ function getCards(keyword,clbk){
         keyword = keyword.replace(/^\*/,'');
         keyword = keyword.replace(/\*$/,'');
         keyword = keyword.replace(/\*/,'.*?');
+
+        $("#results").html('');
         $.each(data,function(){
             article = '\
                 <div class="card"> \
+                    <div class="card-panel">\
+                        <button type="button" class="btn btn-sm btn-outline-secondary edit">\
+                            <i class="fas fa-pen-alt" title="Предложить редакцию"></i>\
+                        </button>\
+                    </div>\
                     <div class="card-body">'+this.article.replace(/\n/g,"<br/>\n")+'</div>\
                 </div>\
             ';
@@ -236,11 +179,12 @@ function getCards(keyword,clbk){
             if(!keyword.match(/^[A0-9-]+$/)){
                 article = article.replace(new RegExp('('+keyword+')','gi'),'<u>$1</u>');
             }
-            
-            html += article;
+            var $t = $(article);
+            $t.data('card', this);
+            $("#results").append($t);
         });
 
-        $("#results").html(html);
+        
         $('#results a').click(
             function (e){
                 e.preventDefault(); 
@@ -248,6 +192,8 @@ function getCards(keyword,clbk){
                 peepCard(code);
             }
         )
+
+        $('#results .card-panel .edit').click(openIssueModal);
        
         clbk();
     },'json');
@@ -276,8 +222,6 @@ $(window).on('hashchange', onhashchange);
 
 $(document).ready(function(){
     onhashchange();
-
-    document.onkeydown = showIssueReport;
 
     $('#peepModal').modal({'show': false});
     $('#issueModal').modal({'show': false});
