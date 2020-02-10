@@ -33,7 +33,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top">            
-            <a class="navbar-brand" href="/"><img src="/_asset/img/site_logo.gif" style="height:38px"></a>
+            <a class="navbar-brand" href="/"><img src="/_asset/img/site_logo.png" style="height:38px"></a>
             
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
