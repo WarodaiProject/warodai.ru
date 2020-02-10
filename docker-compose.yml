@@ -16,5 +16,5 @@ services:
   mongo:
     image: mongo:3.4
     volumes:
-        - /var/data/mongo/local:/data/db
+        - /home/naken/data/mongo/local:/data/db
     network_mode: "host"

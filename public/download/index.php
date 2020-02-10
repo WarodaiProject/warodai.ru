@@ -65,7 +65,7 @@
         <a href="https://github.com/nillsondg/warodai_converter/blob/master/WaroDaiJiten.dictionary.zip?raw=true">https://github.com/nillsondg/warodai_converter/blob/master/WaroDaiJiten.dictionary.zip?raw=true</a><br/>
         <span style="font-size: smaller">
             Сборка основана на оригинале от 07.09.2012<br/>
-            За версию спасибо <strong>Дмитрию Гордееву</strong>.
+            За версию спасибо <strong>Андрею Смирнову</strong>.
         </span>
     </p>
 
