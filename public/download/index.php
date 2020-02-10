@@ -53,7 +53,7 @@
 
     <p>
         <strong>Формат Lingvo x3:</strong>
-        <a href="/download/warodai_lingvo3.zip">http://www.warodai.ru/download/warodai_lingvo3.zip</a>(8.5 Mb)<br/>
+        <a href="/download/warodai_lingvo3.zip">http://www.warodai.ru/download/warodai_lingvo3.zip</a> (8.5 Mb)<br/>
         <span style="font-size: smaller">
             Сборка основана на оригинале от 14.04.2009<br/>
             За версию спасибо <strong>TVA (anime4tv на мейлру)</strong>.
@@ -62,7 +62,7 @@
 
     <p>
         <strong>Формат AppleDict для словаря на MacOS:</strong>
-        <a href="https://github.com/nillsondg/warodai_converter/blob/master/WaroDaiJiten.dictionary.zip?raw=true">https://github.com/nillsondg/warodai_converter/blob/master/WaroDaiJiten.dictionary.zip?raw=true</a><br/>
+        <a href="/download/WaroDaiJiten.dictionary.zip">http://www.warodai.ru/download/WaroDaiJiten.dictionary.zip</a> (41 Mb)<br/>
         <span style="font-size: smaller">
             Сборка основана на оригинале от 07.09.2012<br/>
             За версию спасибо <strong>Андрею Смирнову</strong>.
