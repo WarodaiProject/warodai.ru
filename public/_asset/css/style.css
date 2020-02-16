@@ -32,6 +32,26 @@ input:focus::placeholder{
 	font-weight: bold;
 }
 
+#user-pane .user-spot{
+	display: none;
+}
+
+#user-pane .avatar{	
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	margin: 7px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;	
+	border-color: #ffffff;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 18px 18px 18px 18px;
+	-moz-border-radius: 18px 18px 18px 18px;
+	-webkit-border-radius: 18px 18px 18px 18px;
+}
+
 a.anchor {
     display: block;
     position: relative;
