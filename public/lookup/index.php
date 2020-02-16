@@ -74,20 +74,33 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>          
-                <div class="modal-body">
+                </div>
+                <div class="modal-body signin">
+                    <div class="text-center">
+                        Вы можете авторизоваться своей учетной записью Github.</br>
+                        В этом случае ваше предложение будет направлено от вашего имени.
+                        <br/>
+                        В противном случае предложение будет анонимным.
+                    </div>
+                    
+                </div>
+                <div class="modal-footer signin">                    
+                    <button class="btn btn-secondary anonymousok-btn">Продолжить анонимно</button>
+                    <button class="btn btn-primary signin-btn">Войти</button>
+                </div>
+                <div class="modal-body form d-none">
                     <label><b>Предлагаемая редакция:</b></label>
                     <textarea id="issue-edition" class="form-control" style="height:225px"></textarea>
 
                     <label class="mt-3"><b>Обоснование</b></label>
                     <textarea id="issue-comment" class="form-control" style="height:75px" placeholder="Укажите источники, на которые вы опираетесь, и сделайте выписки из них."></textarea>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer form d-none">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary" onclick="sendIssue()">
                         <i class="fas fa-circle-notch fa-spin loading"></i> Отправить
                     </button>
-                </div>
+                </div>                
             </div>
         </div>
     </div>

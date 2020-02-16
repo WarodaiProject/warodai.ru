@@ -34,11 +34,23 @@ function makeDiffHTML(textA, textB) {
     return html;
 }
 
+function anonymousIssueOk(){
+    window.sessionStorage.setItem('anonymous-issue-ok', true);
+    $('#issueModal .signin').addClass('d-none');
+    $('#issueModal .form').removeClass('d-none');
+}
+
 function openIssueModal(e){
     currentCard = $(this).parents('.card').data('card');
 
     $('#issue-comment').val('');
     $('#issueModal #issue-edition').val(currentCard.article);
+
+    if(window.user || window.sessionStorage.getItem('anonymous-issue-ok')){
+        $('#issueModal .signin').addClass('d-none');
+        $('#issueModal .form').removeClass('d-none');
+    }
+
     $("#issueModal").modal('show');
 }
 
@@ -68,22 +80,50 @@ function sendIssue(){
     diffHTML = diffHTML.replace(/(\d)([).])/g,'$1\\$2');
     var body = diffHTML + "<hr><b>Обоснование</b><br>" + $('#issue-comment').val();
 
-    $.post(
-        '/api/v1/corpus/issue/index.php',
-        {
-            'title': currentCard.article.split("\n")[0],
-            'body': body,
-        },
-        function(data){
-            sendingIssueLock = false;
-            $('#issueModal .loading').hide();
-            if(data.message){
-                alert(data.message);
-                return;
+    if(window.access_token){
+        $.ajax({
+            url: opts.apiGate+'/repos/warodai/warodai-source/issues',
+            type: "POST", 
+            dataType: "json", 
+            crossDomain: true,   
+            data: JSON.stringify({                
+                'title': currentCard.article.split("\n")[0],
+                'body': body,
+                'labels': ['Комментарий из warodai.ru']
+            }),
+            headers: {
+                "Authorization": "token "+window.access_token
+            },
+            success: function(data){
+                sendingIssueLock = false;
+                $('#issueModal .loading').hide();
+                $("#issueModal").modal('hide');
+            },
+            error: function(data){
+                raiseError('Произошла ошибка. Попробуйте снова или перегрузите страницу.');
+                sendingIssueLock = false;
+                $('#issueModal .loading').hide();
             }
-            $("#issueModal").modal('hide');
-        }
-    );
+        });
+    }
+    else{
+        $.post(
+            '/api/v1/corpus/issue/index.php',
+            {
+                'title': currentCard.article.split("\n")[0],
+                'body': body,
+            },
+            function(data){
+                sendingIssueLock = false;
+                $('#issueModal .loading').hide();
+                if(data.message){
+                    alert(data.message);
+                    return;
+                }
+                $("#issueModal").modal('hide');
+            }
+        );
+    }
 }    
 
 function initLookup(e){
@@ -229,6 +269,9 @@ $(document).ready(function(){
     $('#reset-btn').on('click',function(){
         $('#keyword').val('').focus();
     });
+
+    $('#issueModal .signin-btn').click(signin);
+    $('#issueModal .anonymousok-btn').click(anonymousIssueOk);
 
     $('#keyword')
         .on('focus',function(){
