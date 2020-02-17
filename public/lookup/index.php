@@ -18,13 +18,19 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-        <p class="mt-2 text-muted" id="issueNote">
-            <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
-            нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки.
-        </p>        
+        <div class="d-flex flex-row mt-2" id="issueNote">
+            <div class="text-muted col-9 p-0" >
+                <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
+                нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки. Если вы хотите предложить 
+                новую словарную карточку, нажмите кнопку <i class="fas fa-plus"></i>.
+            </div>
+            <div class="border-left col-3 p-0 text-right">
+                <button class="btn btn-sm btn-outline-secondary" onclick="addCard()" title="Предложить статью"><i class="fas fa-plus"></i>
+            </div>
+        </div>
     </form>
 
-    <div id="results" class="container mt-3 px-0"></div>
+    <div id="results" class="container mt-1 px-0"></div>
 
     <div id="loading">
         <i class="fas fa-circle-notch fa-spin"></i>
@@ -78,7 +84,7 @@
                 <div class="modal-body signin">
                     <div class="text-center">
                         Вы можете авторизоваться своей учетной записью Github.</br>
-                        В этом случае ваше предложение будет направлено от вашего имени.
+                        В этом случае предложение будет направлено от вашего имени.
                         <br/>
                         В противном случае предложение будет анонимным.
                     </div>

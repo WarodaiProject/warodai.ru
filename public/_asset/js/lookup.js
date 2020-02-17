@@ -4,6 +4,7 @@ var b=d.body;
 
 var sendingIssueLock = false;
 var currentCard = null;
+var issueMode;
 
 mobileAndTabletcheck = function() {
     var check = false;
@@ -40,11 +41,20 @@ function anonymousIssueOk(){
     $('#issueModal .form').removeClass('d-none');
 }
 
-function openIssueModal(e){
+function editCard(e){
     currentCard = $(this).parents('.card').data('card');
+    issueMode = 'edit';
+    openIssueModal(currentCard.article);
+}
 
+function addCard(e){
+    issueMode = 'new';
+    openIssueModal("…【…】(…)\n");
+}
+
+function openIssueModal(body){
     $('#issue-comment').val('');
-    $('#issueModal #issue-edition').val(currentCard.article);
+    $('#issueModal #issue-edition').val(body);
 
     if(window.user || window.sessionStorage.getItem('anonymous-issue-ok')){
         $('#issueModal .signin').addClass('d-none');
@@ -65,7 +75,7 @@ function sendIssue(){
         alert('Поле "Обоснование" не заполнено.');
         return;
     }
-    if(currentCard.article ==  $('#issueModal #issue-edition').val()){
+    if(issueMode == 'edit' && currentCard.article ==  $('#issueModal #issue-edition').val()){
         if(!confirm('Вы не внесли никаких изменений в предлагаемой редакции. Вы хотите отправить только комментарий?')){
             return;
         }
@@ -74,11 +84,22 @@ function sendIssue(){
     sendingIssueLock = true;
     $('#issueModal .loading').show();
     
-    // Добавляем переносы строк в конце, чтобы строки diff гарантировано разделились в конце карточки.
-    var diffHTML = '<b>Редакция</b><br>'+makeDiffHTML(currentCard.article+"\n", $('#issueModal #issue-edition').val()+"\n");
+    var title, body, labels;
+    if(issueMode == 'edit'){
+        title = currentCard.article.split("\n")[0];
+        // Добавляем переносы строк в конце, чтобы строки diff гарантировано разделились в конце карточки.
+        var diffHTML = '<b>Редакция</b><br>'+makeDiffHTML(currentCard.article+"\n", $('#issueModal #issue-edition').val()+"\n");
+        body = diffHTML + "<hr><b>Обоснование</b><br>" + $('#issue-comment').val();
+        labels = ['Комментарий из warodai.ru','редакция'];
+    }
+    else{
+        title = $('#issueModal #issue-edition').val().split("\n")[0];
+        body = $('#issueModal #issue-edition').val() + "<hr><b>Обоснование</b><br>" + $('#issue-comment').val();
+        labels = ['Комментарий из warodai.ru','новая'];
+    }
+
     // Экранируем символы, которые могут привести к неверной интерпретации в Markdown
-    diffHTML = diffHTML.replace(/(\d)([).])/g,'$1\\$2');
-    var body = diffHTML + "<hr><b>Обоснование</b><br>" + $('#issue-comment').val();
+    body = body.replace(/(\d)([).])/g,'$1\\$2');
 
     if(window.access_token){
         $.ajax({
@@ -87,9 +108,9 @@ function sendIssue(){
             dataType: "json", 
             crossDomain: true,   
             data: JSON.stringify({                
-                'title': currentCard.article.split("\n")[0],
+                'title': title,
                 'body': body,
-                'labels': ['Комментарий из warodai.ru']
+                'labels': labels
             }),
             headers: {
                 "Authorization": "token "+window.access_token
@@ -110,8 +131,9 @@ function sendIssue(){
         $.post(
             '/api/v1/corpus/issue/index.php',
             {
-                'title': currentCard.article.split("\n")[0],
+                'title': title,
                 'body': body,
+                'labels': labels
             },
             function(data){
                 sendingIssueLock = false;
@@ -233,7 +255,7 @@ function getCards(keyword,clbk){
             }
         )
 
-        $('#results .card-panel .edit').click(openIssueModal);
+        $('#results .card-panel .edit').click(editCard);
        
         clbk();
     },'json');
