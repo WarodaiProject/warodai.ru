@@ -47,8 +47,14 @@
                     <li class="nav-item">
                         <a class="nav-link" data-match="help" href="/help/">Помощь</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-match="contrib" href="/contrib/">Участие</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" data-match="contrib">Участие</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/contrib/">Условия участия</a>
+                            <a class="dropdown-item" href="https://github.com/warodai/warodai-source">Репозиторий</a>
+                            <a class="dropdown-item" href="https://github.com/warodai/warodai-source/issues">Тикеты</a>
+                            <a class="dropdown-item" href="/editor/">Редактор WARODAI</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-match="about" href="/about/">О словаре</a>
@@ -57,11 +63,11 @@
             </div>
 
             <div id="user-pane" class="ml-auto">
-                <button class="btn btn-sm btn-secondary signin">Войти</button>
+                <button class="btn btn-sm btn-secondary start-signin" onclick="startSignIn()">Войти</button>
                 <div class="btn-group user-spot">
                     <div class="avatar" data-toggle="dropdown" data-display="static"></div>
                     <div class="signout dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">Выйти</button>
+                        <button class="dropdown-item" type="button" onclick="signout()">Выйти</button>
                     </div>
                 </div>
             </div>
@@ -69,10 +75,38 @@
             <div data-toggle="collapse" class="d-md-none menu-toggler"
                 data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
             >
-            <i class="fas fa-bars"></i>
-        </div>
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
+
+    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div class="mt-3">
+                        <div class="d-flex flex-column flex-md-row">
+                            <div class="text-center mb-4">
+                                <i class="fab fa-github" style="font-size: 6em"></i>
+                            </div>
+                            <div class="ml-3 small">
+                                Работа над словарём ведётся в репозитории на платформе Github.
+                                Для того, чтобы принять участие в проекте, вы должны иметь учётную запись на этой платформе.<br/>
+                                После нажатия на кнопку «Войти» вы сможете зарегистрироваться в Github или, если у вас уже есть учётная запись,
+                                авторизоваться на сайте с помощью неё.
+                            </div>
+                        </div>
+                        <div class="mt-2 text-center">
+                        <button class="btn btn-primary signin" onclick="signin()">Войти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="content">
         <div class="container">

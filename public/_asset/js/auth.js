@@ -94,9 +94,13 @@ function getUser(success, failure){
 }
 
 function renderUser(user){
-    $('#user-pane .signin').hide();
+    $('#user-pane .start-signin').hide();
     $('#user-pane .avatar').css('backgroundImage','url('+user.avatar+')')
     $('#user-pane .user-spot').show();
+}
+
+function startSignIn(){
+    $('#signinModal').modal('show');
 }
 
 function signin(){
@@ -118,6 +122,7 @@ function signout(){
 
 $(function(){
 
+    $('#signinModal').modal({'show': false});
     var params = getUrlVars();
 
     if(params.code && params.state){
@@ -140,7 +145,4 @@ $(function(){
             signin();
         }
     }
-
-    $('#user-pane .signin').click(signin);
-    $('#user-pane .signout').click(signout);
 });
