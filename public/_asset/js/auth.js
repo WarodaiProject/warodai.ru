@@ -2,11 +2,17 @@ var access_token;
 var user;
 
 var opts = {
-    'client_id': '590ace4e4b07e252a23f',
-    'redirect_uri': encodeURI(window.location.protocol+'//'+window.location.host+window.location.pathname),
-    'authPoint': 'https://warodai.ru/api/v1/utils/github_auth_token/?app=linux',
-    'OAuthPoint': 'https://github.com/login/oauth/authorize',
-    'apiGate': 'https://api.github.com'
+    'github_client_id': '',
+    'github_access_token_proxy': '',
+    'redirect_uri': encodeURI(window.location.protocol+'//'+window.location.host+window.location.pathname)
+}
+
+for (var k in window.CONF.github_client_ids){
+    if(window.location.host.indexOf(k) >= 0) {
+        opts.github_client_id = window.CONF.github_client_ids[k];
+        opts.github_access_token_proxy = CONF.github_access_token_proxy + '?app='+k;
+        break;
+    }
 }
 
 function returnToStart(){
@@ -28,7 +34,7 @@ function raiseError(msg, clbk){
 
 function getAccessToken(code, state, success, failure){
     var q = {
-        'client_id': opts.client_id,  
+        'client_id': opts.github_client_id,
         'code': code,
         'redirect_uri': opts.redirect_uri,
         'state': state,
@@ -40,7 +46,7 @@ function getAccessToken(code, state, success, failure){
         dataType: "json",
         crossDomain: true,
         data: q,
-        url: opts.authPoint,
+        url: opts.github_access_token_proxy,
         success: function(response){
             window.access_token = response.access_token;
             window.sessionStorage.setItem('access_token', response.access_token);
@@ -69,7 +75,7 @@ function checkAuthorization(success, failure){
 }
 
 function getOauthCode(){
-    window.location = opts.OAuthPoint+'?client_id='+opts.client_id+'&scope=repo&redirect_uri='+opts.redirect_uri+'&response_type=code&state='+Math.random();
+    window.location = CONF.github_oauth_point+'?client_id='+opts.github_client_id+'&scope=repo&redirect_uri='+opts.redirect_uri+'&response_type=code&state='+Math.random();
 }
 
 function getUser(success, failure){    
@@ -80,7 +86,7 @@ function getUser(success, failure){
         headers: {
             "Authorization": "token "+access_token
         },                   
-        url: opts.apiGate+'/user',
+        url: CONF.github_api_root+'/user',
         success: function(usr_response){
             window.user = {
                 name: usr_response.name || usr_response.login, 
@@ -107,6 +113,7 @@ function signin(){
     checkAuthorization(
         function(user){
             renderUser(user);
+            $('.auth-only').show();
         },
         function() {
             getOauthCode();
@@ -123,6 +130,7 @@ function signout(){
 $(function(){
 
     $('#signinModal').modal({'show': false});
+    $('.auth-only').hide();
     var params = getUrlVars();
 
     if(params.code && params.state){

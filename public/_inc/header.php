@@ -26,6 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
+    <script src="/_asset/js/config.js.php?v=3" crossorigin="anonymous"></script>
     <script src="/_asset/js/auth.js?v=3" crossorigin="anonymous"></script>
     <script src="/_asset/js/lookup.js?v=3" crossorigin="anonymous"></script>
     <script src="/_asset/js/diff.js" crossorigin="anonymous"></script>
@@ -53,7 +54,7 @@
                             <a class="dropdown-item" href="/contrib/">Условия участия</a>
                             <a class="dropdown-item" href="https://github.com/warodai/warodai-source">Репозиторий</a>
                             <a class="dropdown-item" href="https://github.com/warodai/warodai-source/issues">Тикеты</a>
-                            <a class="dropdown-item" href="/editor/">Редактор WARODAI</a>
+                            <a class="dropdown-item auth-only" href="/editor/">Редактор WARODAI</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                         <div class="mt-2 text-center">
-                        <button class="btn btn-primary signin" onclick="signin()">Войти</button>
+                            <button class="btn btn-primary signin" onclick="signin()">Войти</button>
                         </div>
                     </div>
                 </div>

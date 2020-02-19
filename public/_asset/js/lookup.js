@@ -103,7 +103,7 @@ function sendIssue(){
 
     if(window.access_token){
         $.ajax({
-            url: opts.apiGate+'/repos/warodai/warodai-source/issues',
+            url: CONF.github_api_root+'/repos/'+CONF.github_bjrd_source+'/issues',
             type: "POST", 
             dataType: "json", 
             crossDomain: true,   
