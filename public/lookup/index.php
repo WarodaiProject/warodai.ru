@@ -18,13 +18,19 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-        <p class="mt-2 text-muted" id="issueNote">
-            <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
-            нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки.
-        </p>        
+        <div class="d-flex flex-row mt-2" id="issueNote">
+            <div class="text-muted col-10 p-0" >
+                <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
+                нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки. Если вы хотите предложить 
+                новую словарную карточку, нажмите кнопку <i class="fas fa-plus"></i>.
+            </div>
+            <div class="border-left col-2 py-0 pr-0 pl-1 text-right">
+                <button class="btn btn-sm btn-outline-secondary" onclick="addCard()" title="Предложить статью"><i class="fas fa-plus"></i>
+            </div>
+        </div>
     </form>
 
-    <div id="results" class="container mt-3 px-0"></div>
+    <div id="results" class="container mt-1 px-0"></div>
 
     <div id="loading">
         <i class="fas fa-circle-notch fa-spin"></i>
@@ -74,20 +80,33 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>          
-                <div class="modal-body">
+                </div>
+                <div class="modal-body signin">
+                    <div class="text-center">
+                        Вы можете авторизоваться своей учетной записью Github.</br>
+                        В этом случае предложение будет направлено от вашего имени.
+                        <br/>
+                        В противном случае предложение будет анонимным.
+                    </div>
+                    
+                </div>
+                <div class="modal-footer signin">                    
+                    <button class="btn btn-secondary anonymousok-btn">Продолжить анонимно</button>
+                    <button class="btn btn-primary signin-btn">Войти</button>
+                </div>
+                <div class="modal-body form d-none">
                     <label><b>Предлагаемая редакция:</b></label>
                     <textarea id="issue-edition" class="form-control" style="height:225px"></textarea>
 
                     <label class="mt-3"><b>Обоснование</b></label>
                     <textarea id="issue-comment" class="form-control" style="height:75px" placeholder="Укажите источники, на которые вы опираетесь, и сделайте выписки из них."></textarea>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer form d-none">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary" onclick="sendIssue()">
                         <i class="fas fa-circle-notch fa-spin loading"></i> Отправить
                     </button>
-                </div>
+                </div>                
             </div>
         </div>
     </div>

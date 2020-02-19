@@ -14,9 +14,14 @@ if(!empty($_POST['title']) && !empty($_POST['body'])){
 
     $issue = [        
         'title'=>$_POST['title'],
-        'body'=>$_POST['body'],
-        'labels'=>['Комментарий из warodai.ru']
+        'body'=>$_POST['body']
     ];
+    if(isset($_POST['labels'])){
+        if(!is_array($_POST['labels'])){
+            $_POST['labels'] = [$_POST['labels']];
+        }
+        $issue['labels'] = $_POST['labels'];
+    }
     $ch = curl_init($_CONF['github_api_root'].'/repos/'.$_CONF['github_bjrd_source'].'/issues');    
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($issue) ); 
