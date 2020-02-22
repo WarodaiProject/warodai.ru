@@ -18,7 +18,8 @@
                 <i class="fa fa-search"></i>
             </div>                                    
         </div>
-        <div class="d-flex flex-row mt-2" id="issueNote">
+        <div id="issueNote">
+        <div class="d-flex flex-row mt-2">
             <div class="text-muted col-10 p-0" >
                 <b>Внимание!</b> Если у вас есть исправление, дополнение или иной комментарий к статье, 
                 нажмите на кнопку <i class="fas fa-pen-alt"></i> в правом верхнем углу карточки. Если вы хотите предложить 
@@ -27,6 +28,7 @@
             <div class="border-left col-2 py-0 pr-0 pl-1 text-right">
                 <button class="btn btn-sm btn-outline-secondary" onclick="addCard()" title="Предложить статью"><i class="fas fa-plus"></i>
             </div>
+        </div>
         </div>
     </form>
 
