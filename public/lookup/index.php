@@ -26,7 +26,7 @@
                 новую словарную карточку, нажмите кнопку <i class="fas fa-plus"></i>.
             </div>
             <div class="border-left col-2 py-0 pr-0 pl-1 text-right">
-                <button class="btn btn-sm btn-outline-secondary" onclick="addCard()" title="Предложить статью"><i class="fas fa-plus"></i>
+                <div class="btn btn-sm btn-outline-secondary" onclick="addCard()" title="Предложить статью"><i class="fas fa-plus"></i></div>
             </div>
         </div>
         </div>
