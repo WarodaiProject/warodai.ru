@@ -46,7 +46,7 @@
                         <a class="nav-link" data-match="download" href="/download/">Скачать</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" data-match="help" href="/help/">Помощь</a>
+                        <a class="nav-link" data-match="none" href="https://forum.warodai.ru">Форум</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" data-match="contrib">Участие</a>
@@ -57,8 +57,13 @@
                             <a class="dropdown-item auth-only" href="/editor/">Редактор WARODAI</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-match="about" href="/about/">О словаре</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-match="(about|help)" href="#">О словаре</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/about/">О проекте</a>
+                            <a class="dropdown-item" href="/help/">Помощь</a>
+                            <a class="dropdown-item" href="/about/readme/">README</a>
+                        </div>
                     </li>
                 </ul>
             </div>

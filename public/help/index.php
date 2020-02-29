@@ -1,5 +1,7 @@
 <?php include('../_inc/header.php') ?>
 
+<?php include('../_inc/about_submenu.php') ?>
+
     <h1>Помощь</h1>
 
     <div class="alert alert-primary" role="alert">
