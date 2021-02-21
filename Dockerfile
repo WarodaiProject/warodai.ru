@@ -1,6 +1,7 @@
-FROM php:5-apache
+FROM php:7-apache
 
 RUN pecl install mongodb 
+RUN pecl install php7-cli 
 
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
