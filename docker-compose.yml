@@ -12,9 +12,5 @@ services:
       - ./vendor:/var/www/vendor
       - ./workers:/var/www/workers
       - ./repos:/var/www/repos
-    network_mode: host
   mongo:
     image: mongo:3.4
-    volumes:
-        - /home/naken/data/mongo/local:/data/db
-    network_mode: "host"
