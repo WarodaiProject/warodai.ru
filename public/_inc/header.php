@@ -46,7 +46,7 @@
                         <a class="nav-link" data-match="download" href="/download/">Скачать</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" data-match="none" href="https://forum.warodai.ru">Форум</a>
+                        <a class="nav-link" data-match="none" href="https://github.com/warodai/warodai-source/discussions">Форум</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" data-match="contrib">Участие</a>
