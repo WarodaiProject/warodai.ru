@@ -2,3 +2,6 @@ logs/*
 repos/*
 .idea
 etc/config.php
+public/download/bjrd_txt.zip
+public/download/warodai_txt.zip
+editor/*
