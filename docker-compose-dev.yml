@@ -5,16 +5,14 @@ services:
     image: warodai
     build: ./
     ports:
-      - "10.135.189.158:8080:80"
+      - "8080:80"
     volumes:
       - ./public:/var/www/html
       - ./etc:/var/www/etc
       - ./vendor:/var/www/vendor
       - ./workers:/var/www/workers
       - ./repos:/var/www/repos
-    restart: always
   mongo:
     image: mongo:3.4
-    restart: always
     ports:
-      - "10.135.189.158:3306:3306"
+      - "3306:3306"
