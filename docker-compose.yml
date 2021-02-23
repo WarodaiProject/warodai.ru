@@ -17,4 +17,4 @@ services:
     image: mongo:3.4
     restart: always
     ports:
-      - "10.135.189.158:3306:3306"
+      - "10.135.189.158:27017:27017"
