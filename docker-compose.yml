@@ -7,6 +7,7 @@ services:
     ports:
       - "10.135.189.158:8080:80"
     volumes:
+      - ./logs:/var/www/logs
       - ./public:/var/www/html
       - ./etc:/var/www/etc
       - ./vendor:/var/www/vendor

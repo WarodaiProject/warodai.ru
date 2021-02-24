@@ -1,4 +1,4 @@
-logs/*
+logs/*-query-log.txt
 repos/*
 .idea
 etc/config.php
