@@ -64,7 +64,7 @@ else{
 
     //Лог
     $h = fopen('../../../../../logs/' . date("Y-m-d") . '-query-log.txt', 'a');
-    fwrite($h, date("Y-m-d\TH:i:s") . ' ' . $_SERVER['REMOTE_ADDR'] . ' ' . $keyword . "\n");
+    fwrite($h, date("Y-m-d\TH:i:s") . ' ' . $_SERVER['HTTP_X_REAL_IP'] . ' ' . $keyword . "\n");
     fclose($h);
 }
 
