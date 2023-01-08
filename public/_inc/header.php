@@ -35,7 +35,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top">            
-            <a class="navbar-brand" href="/"><img src="/_asset/img/site_logo.png" style="height:38px"></a>
+            <a class="navbar-brand" href="/"><img src="/_asset/img/warodai-logo-heiwa.png" style="height:38px"></a>
             
             <div class="collapse navbar-collapse mr-auto" id="navbarCollapse">
                 <ul class="navbar-nav">
