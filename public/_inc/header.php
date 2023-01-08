@@ -46,14 +46,14 @@
                         <a class="nav-link" data-match="download" href="/download/">Скачать</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" data-match="none" href="https://github.com/warodai/warodai-source/discussions">Форум</a>
+                        <a class="nav-link" data-match="none" href="https://github.com/WarodaiProject/warodai-source/discussions">Форум</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" data-match="contrib">Участие</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/contrib/">Условия участия</a>
-                            <a class="dropdown-item" href="https://github.com/warodai/warodai-source">Репозиторий</a>
-                            <a class="dropdown-item" href="https://github.com/warodai/warodai-source/issues">Тикеты</a>
+                            <a class="dropdown-item" href="https://github.com/WarodaiProject/warodai-source">Репозиторий</a>
+                            <a class="dropdown-item" href="https://github.com/WarodaiProject/warodai-source/issues">Тикеты</a>
                             <a class="dropdown-item auth-only" href="/editor/">Редактор WARODAI</a>
                         </div>
                     </li>
