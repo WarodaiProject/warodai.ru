@@ -1,7 +1,7 @@
 <?php 
     include('../_inc/header.php');
     
-    $text = md2html('https://raw.githubusercontent.com/warodai/warodai-source/master/README.md');
+    $text = md2html('https://raw.githubusercontent.com/WarodaiProject/warodai-source/master/README.md');
 
     $matches = [];
     preg_match("/<h1>1\. [^<]+<\/h1>([\s\S]+)<h1>2\. /m", $text, $matches);

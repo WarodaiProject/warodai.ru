@@ -2,6 +2,6 @@
 
     <?php include('../../_inc/about_submenu.php') ?>
 
-    <?=md2html('https://raw.githubusercontent.com/warodai/warodai-source/master/README.md')?>
+    <?=md2html('https://raw.githubusercontent.com/WarodaiProject/warodai-source/master/README.md')?>
 
 <?php include('../../_inc/footer.php') ?>
