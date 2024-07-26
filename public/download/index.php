@@ -4,9 +4,7 @@
 
     <p>Здесь вы можете скачать весь словарь целиком.</p>
     <p>
-        Мы надеемся, что в число форматов, в которых распространяется словарь, будет со временем расти.<br/>
-        Если вам удалось перевести словарь в какой-то другой формат,
-        напишите нам на <a href="mailto:byars@yandex.ru">byars@yandex.ru</a>.
+        Мы надеемся, что в число форматов, в которых распространяется словарь, будет со временем расти.
     </p>
 
     <p>
@@ -21,6 +19,14 @@
         <a href="/download/warodai_epwing.zip">http://www.warodai.ru/download/warodai_epwing.zip</a> (<?= round(filesize('warodai_epwing.zip')*.000001,2)?>Mb)
         <br/>
         <span style="font-size: smaller">Сборка от <?= date('d.m.Y',filemtime('warodai_epwing.zip'))?></span>
+    </p>
+
+    <p>
+        <strong>Формат Edict и инструмент для конвертации:</strong>
+        <a href="https://github.com/update692/warodai-to-edict">https://github.com/update692/warodai-to-edict</a><br/>
+        <span style="font-size: smaller">
+            За версию спасибо <strong><a href="https://github.com/update692">update692</a></strong>.
+        </span>
     </p>
 
     <p>
