@@ -66,6 +66,7 @@
         </span>
     </p>
 
+    <!--Слишком устарело
     <p>
         <strong>Формат AppleDict для словаря на MacOS:</strong>
         <a href="/download/WaroDaiJiten.dictionary.zip">http://www.warodai.ru/download/WaroDaiJiten.dictionary.zip</a> (41 Mb)<br/>
@@ -74,6 +75,7 @@
             За версию спасибо <strong>Андрею Смирнову</strong>.
         </span>
     </p>
+    -->
 
     <p>
         <strong>Формат для браузерного плагина <a href="https://foosoft.net/projects/yomichan/">Yomichan</a>:</strong>
