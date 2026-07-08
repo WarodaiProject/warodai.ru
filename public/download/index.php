@@ -114,6 +114,15 @@
 
     <p>
         
+        <strong>Словарь в виде приложения для Microsoft Windows:</strong>
+        <a target="_blank" href="https://apps.microsoft.com/detail/9n46bm6fsq1v">https://apps.microsoft.com/detail/9n46bm6fsq1v</a><br/>
+        <span style="font-size: smaller">
+            Спасибо <strong>A.Nikolaev</strong> за работу!
+        </span>
+    </p>
+
+    <p>
+        
         <strong>Словарь в виде приложения для Android:</strong>
         <a target="_blank" href="http://market.android.com/details?id=com.ginkage.ejlookup">http://market.android.com/details?id=com.ginkage.ejlookup</a><br/>
         <span style="font-size: smaller">
